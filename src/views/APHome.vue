@@ -9,6 +9,7 @@
           v-for="(loc,i) in cityList"
           :key='i'
           class="city-marker"
+          :class="mapLoad ? 'show' : ''"
           :style="markerStyle(loc[1])"
           :ref="`city-${loc[0]}`"
         >
@@ -16,7 +17,7 @@
         </div>
       </template>
       <div class="desc-card">
-        <div class="title">Presence of RESET Air Accredited Professionals Globally</div>
+        <div class="title">{{$t('AP.mapHint')}}</div>
         <div class="color-list">
           <mu-row>
             <mu-col v-for="(color, i) in colorList" :key='i'>
@@ -31,27 +32,91 @@
     <div class="nav-bar">
       <div class="content-container">
         <mu-breadcrumbs>
-          <mu-breadcrumbs-item key="home" to="/">Home</mu-breadcrumbs-item>
-          <mu-breadcrumbs-item key="ap" :disabled="true">The RESET Air Accredited Professionals</mu-breadcrumbs-item>
+          <mu-breadcrumbs-item key="home" to="/">{{$t('nav.home')}}</mu-breadcrumbs-item>
+          <mu-breadcrumbs-item key="ap" :disabled="true">{{$t('nav.ap')}}</mu-breadcrumbs-item>
         </mu-breadcrumbs>
       </div>
     </div>
     <div class="content-container">
       <div class="city-filter">
-        <div class="search-input-by-name">
+        <div class="input-with-border-icon">
           <div class="icon"><i class="iconfont icon-Search" /></div>
-          <input type='text' placeholder="Search by project name" />
+          <input type='text' :placeholder="$t('AP.searchHint')" />
         </div>
-        <mu-select solo v-model='currentCity' popover-class='city-selector'>
-          <mu-option :key="-1" label="All Cities" :value="-1"></mu-option>
-          <mu-option
-            v-for="(city,index) in cityList"
-            :key="index"
-            :label="city[0]"
-            :value="index"></mu-option>
-        </mu-select>
+        <div class="filter-advance">
+          <mu-row gutter>
+            <mu-col span="6">
+              <div class="input-with-border-icon">
+                <div class="label">{{$t('AP.country')}}</div>
+                <mu-select solo v-model='currentCity' popover-class='custom-selector'>
+                  <mu-option :key="-1" label="All Cities" :value="-1"></mu-option>
+                  <mu-option
+                    v-for="(city,index) in cityList"
+                    :key="index"
+                    :label="city[0]"
+                    :value="index"></mu-option>
+                </mu-select>
+              </div>
+            </mu-col>
+            <mu-col span="6">
+              <div class="input-with-border-icon">
+                <div class="label">{{$t('AP.city')}}</div>
+                <mu-select solo v-model='currentCity' popover-class='custom-selector'>
+                  <mu-option :key="-1" label="All Cities" :value="-1"></mu-option>
+                  <mu-option
+                    v-for="(city,index) in cityList"
+                    :key="index"
+                    :label="city[0]"
+                    :value="index"></mu-option>
+                </mu-select>
+              </div>
+            </mu-col>
+          </mu-row>
+          <span class="clear-btn">{{$t('AP.clear')}}</span>
+        </div>
       </div>
-      <div class="ap-list">ss</div>
+      <div class="ap-list">
+        <div class="ap-number">
+          {{$t('AP.currentNum')}}: {{apList.length}}
+        </div>
+        <div class="list-table">
+          <table>
+            <thead>
+              <tr>
+                <th class="ap-avatar"></th>
+                <th class="text-left">{{$t('AP.name')}}</th>
+                <th class="text-left">{{$t('AP.location')}}</th>
+                <th>{{$t('AP.certification')}}</th>
+                <th>{{$t('AP.projects')}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="ap-item" @click="navToApDetail(2)">
+                <td></td>
+                <td class="text-left">
+                  <div class="ap-name">Beverly Mathias</div>
+                  <div class="ap-company">Danis Building Construction Company</div>
+                </td>
+                <td class="text-left">
+                  Seattle WA, Bremerton WA, , Bremerton …
+                </td>
+                <td>
+                  <span class="certification-icon">
+                    <i class="iconfont icon-RESETAIR" />
+                  </span>
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <Paginator
+          :total="5"
+          :current="currentPage"
+          @change="changePage" />
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +129,7 @@ import mapboxgl from 'mapbox-gl'
 import Color from 'color'
 import { $get } from '@/libs/api'
 import { getBounds } from 'geolib'
+import Paginator from '../components/Paginator'
 const mbxClient = require('@mapbox/mapbox-sdk')
 const mbxGeo = require('@mapbox/mapbox-sdk/services/geocoding')
 const mbxStyles = require('@mapbox/mapbox-sdk/services/styles')
@@ -71,10 +137,11 @@ mapboxgl.accessToken = MAPBOX_TOKEN
 const geoService = mbxGeo({ accessToken: MAPBOX_TOKEN });
 
 export default {
-  name: 'home',
+  name: 'aphome',
   data () {
     return {
       map: null,
+      mapLoad: false,
       colorList: [
         ['#FCFFF1', 5, 15],
         ['#D9F4F8', 10, 30],
@@ -89,10 +156,13 @@ export default {
         ['Bangalore', 2],
         ['Singapore', 2],
         ['New Delhi', 20]
-      ]
+      ],
+      apList: [],
+      currentPage: 1
     }
   },
   components: {
+    Paginator
   },
   async mounted () {
     if (this.map) {
@@ -109,6 +179,7 @@ export default {
       scrollZoom: false
     }).on('load', () => {
       // this.fetchLocationList()
+      this.mapLoad = true
     })
     var nav = new mapboxgl.NavigationControl()
     this.map.addControl(nav, 'bottom-right')
@@ -116,7 +187,15 @@ export default {
       await this.addCityMarker(city[0])
     }
   },
+  watch: {
+    currentPage: function (newV) {
+      console.log(newV)
+    }
+  },
   methods: {
+    changePage (page) {
+      this.currentPage = +page
+    },
     getColor (num) {
       let targetColor = this.colorList[0]
       for (let color of this.colorList) {
@@ -163,6 +242,9 @@ export default {
         }
       })
     },
+    navToApDetail (id) {
+      this.$router.history.push('/ap/' + id)
+    },
     fetchLocationList () {
       $get('locations').then(resp => {
         resp.data.forEach(e => {
@@ -194,14 +276,13 @@ export default {
 </script>
 <style lang='stylus' scoped>
 $primaryColor = #648EFA
+$activeColor = #22BBAE
 
 .home
   height 100%
   margin-top 80px
   background #fff
-  .content-container
-    width 960px
-    margin 0 auto
+  padding-bottom 80px
 .map-area
   height 612px
   position relative
@@ -245,6 +326,9 @@ $primaryColor = #648EFA
 .city-marker
   border-radius 50%
   position absolute
+  display none
+  &.show
+    display block
 .mp-dot
   display inline-block
   width 6px
@@ -259,10 +343,10 @@ $primaryColor = #648EFA
   background #F9F9F9
 .city-filter
   padding 16px
-  margin 40px 0
+  margin 40px 0 15px 0
   box-shadow 0px 7px 14px 1px rgba(185,194,193,0.05),0px 3px 6px 0px rgba(93,115,110,0.07)
   border-radius 4px
-.search-input-by-name
+.input-with-border-icon
   border 1px solid #EEF1F6
   height 31px
   line-height 31px
@@ -270,6 +354,13 @@ $primaryColor = #648EFA
   .icon
     width 50px
     text-align center
+    color #858585
+  .label
+    width auto
+    padding 0 12px
+    color #858585
+    flex 0 0 auto
+    line-height 30px
   input
     width 100%
     flex 1 1 auto
@@ -279,22 +370,49 @@ $primaryColor = #648EFA
     border-left 1px solid #EEF1F6
     &:focus
       box-shadow none
-// .location-filter
-//   position absolute
-//   right 10px
-//   top 10px
-//   background white
-//   z-index 10
-//   padding 8px 16px
-//   box-shadow 0px 3px 16px 0px rgba(201,208,227,0.25)
-//   border-radius 2px
-//   opacity 0.97
-//   color #333
-//   font-size 14px
-//   .is-solo
-//     margin-left 8px
-//     width 142px
-//     border 1px solid rgba(244,247,252,1)
-//     padding 0
-//     min-height auto
+      border 1px solid $activeColor
+.filter-advance
+  margin-top 15px
+  padding-right 100px
+  position relative
+  .mu-input
+    min-height 0
+    padding 0 0 0 16px
+    width 100%
+    flex 1 1 auto
+    border-left 1px solid #EEF1F6
+    font-size 14px
+  .clear-btn
+    position absolute
+    bottom 5px
+    right 0px
+    display inline-block
+    width 100px
+    text-align center
+    color $activeColor
+.ap-list .ap-number
+  text-align left
+.ap-avatar
+  width 50px
+.ap-item
+  cursor pointer
+  &:hover
+    background #f5f5f5
+  td
+    padding 10px 0
+.certification-icon
+  display inline-block
+  background #4F9EF1
+  color white
+  width 32px
+  height 32px
+  line-height 32px
+  text-align center
+  border-radius 50%
+.list-table
+  padding 20px 0
+  table
+    width 100%
+    border-collapse collapse
+    border-spacing 0
 </style>

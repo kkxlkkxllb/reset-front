@@ -93,7 +93,7 @@ export default {
 <style lang="stylus">
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic')
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pontano+Sans')
-@import url('//at.alicdn.com/t/font_1297427_gowrc1g1emt.css')
+@import url('//at.alicdn.com/t/font_1297427_2hbtyvne6q2.css')
 
 $regularWidth = 960px
 $mobileWidth = 640px
@@ -112,7 +112,16 @@ $primaryColor = #22BBAE
     min-width auto
   .mobile-menu
     min-width auto
+  .content-container
+    width $regularWidth
+    margin 0 auto
 
+.mu-primary-color
+  background $primaryColor !important
+.text-left
+  text-align left
+.custom-selector .mu-option.is-selected .mu-item
+  color $primaryColor
 .header
   background white
   position fixed
