@@ -10,29 +10,49 @@
       </div>
     </div>
     <div class="ap-detail--container content-container">
-      <div class="ap-detail--sider">
-        <div class="ap-avatar"> </div>
+      <div class="ap-detail--sider" v-if="apInfo">
+        <div class="ap-avatar">
+          <mu-avatar :size="212">
+            <img :src="ASSET_BASE + apInfo.avatar_url">
+          </mu-avatar>
+        </div>
         <mu-button color="primary" round>Get the email</mu-button>
+        <div class="ap-email">{{apInfo.email}}</div>
+        <span class="certification-icon">
+          <i class="iconfont icon-RESETAIR" />
+        </span>
       </div>
-      <div class="ap-detail--content">
-        <h2>Christine Bruckner</h2>
+      <div class="ap-detail--content" v-if="apInfo">
+        <h2>{{apInfo.name}}</h2>
+        <div>{{apInfo.company}}</div>
+        <div>{{apInfo.location}}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { $get } from '@/libs/api'
+import { ASSET_BASE } from '@/libs/constant'
 
 export default {
   name: 'apdetail',
   data () {
     return {
-
+      ASSET_BASE,
+      apInfo: null
     }
   },
   components: {
   },
   computed: {
 
+  },
+  mounted() {
+    const apid = this.$route.params.id
+    $get(`/web/aps/${apid}`).then(res => {
+      console.log(res.data)
+      this.apInfo = res.data
+    })
   },
   methods: {
 
@@ -50,6 +70,13 @@ export default {
     width 288px
     background rgba(252,250,247,1)
     box-shadow 2px 2px 6px 0px rgba(83,51,8,0.04)
+    .ap-avatar
+      margin 32px 0
+      line-height 1
+    .ap-email
+      margin 10px 0
   .ap-detail--content
     flex 1 1 auto
+    padding 32px
+    text-align left
 </style>

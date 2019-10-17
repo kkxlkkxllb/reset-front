@@ -115,7 +115,8 @@ $primaryColor = #22BBAE
   .content-container
     width $regularWidth
     margin 0 auto
-
+  .mapboxgl-ctrl-attrib-inner, .mapboxgl-ctrl-logo
+    display none !important
 .mu-primary-color
   background $primaryColor !important
 .text-left
@@ -194,4 +195,13 @@ $primaryColor = #22BBAE
     padding 5px 10px
     border-radius 5px
     background-color #EEF0F3
+.certification-icon
+  display inline-block
+  background #4F9EF1
+  color white
+  width 32px
+  height 32px
+  line-height 32px
+  text-align center
+  border-radius 50%
 </style>

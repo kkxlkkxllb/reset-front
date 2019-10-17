@@ -6,9 +6,11 @@ import {
 
 export const $api = (method, url, params = {}) => {
   EventBus.$emit('load:start')
-  const data = method === 'get' ? { params } : params
+  const data = method === 'get' ? { params: Object.assign({}, params, {
+    access_token: '8bec8dcb91fa4b1cf5663f4105b3b8e8'
+  }) } : params
   return new Promise((resolve, reject) => {
-    Vue.axios[method](url, data).then(resp => {
+    Vue.axios[method](`${url}`, data).then(resp => {
       if (resp.data.meta.code === RESP_OK_CODE) {
         resolve(resp.data)
       } else {
