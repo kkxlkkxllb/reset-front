@@ -16,16 +16,21 @@
             <img :src="ASSET_BASE + apInfo.avatar_url">
           </mu-avatar>
         </div>
-        <mu-button color="primary" round>Get the email</mu-button>
-        <div class="ap-email">{{apInfo.email}}</div>
-        <span class="certification-icon">
-          <i class="iconfont icon-RESETAIR" />
-        </span>
+        <mu-button color="primary" round @click="showEmail = true">Get the email</mu-button>
+        <div class="ap-email" v-show="showEmail">{{apInfo.email}}</div>
+        <div class="ap-certification">
+          <span class="certification-icon">
+            <i class="iconfont icon-RESETAIR" />
+          </span>
+        </div>
       </div>
       <div class="ap-detail--content" v-if="apInfo">
         <h2>{{apInfo.name}}</h2>
-        <div>{{apInfo.company}}</div>
-        <div>{{apInfo.location}}</div>
+        <div class="ap-company">{{apInfo.company}}</div>
+        <div class="ap-location">
+          <i class="iconfont icon-location" />
+          {{apInfo.location}}
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +44,8 @@ export default {
   data () {
     return {
       ASSET_BASE,
-      apInfo: null
+      apInfo: null,
+      showEmail: false
     }
   },
   components: {
@@ -74,9 +80,21 @@ export default {
       margin 32px 0
       line-height 1
     .ap-email
-      margin 10px 0
+      margin-top 10px
+    .ap-certification
+      margin-top 10px
   .ap-detail--content
     flex 1 1 auto
     padding 32px
     text-align left
+    h2
+      margin 0
+      font-size 24px
+    .ap-company
+      font-size 16px
+    .ap-location
+      color #858585
+      font-size 16px
+      i
+        vertical-align middle
 </style>

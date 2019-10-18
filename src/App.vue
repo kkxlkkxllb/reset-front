@@ -20,7 +20,7 @@
             href='#'
             @click.prevent="changLang()">{{lang === 'zh' ? 'English' : '中文'}}</a>
         </div>
-        <div class="search-container" slot="right">
+        <!-- <div class="search-container" slot="right">
           <mu-button v-show="!showSearchInput" icon class="icon" @click="showSearchInput = true">
             <i class="iconfont icon-Search" />
           </mu-button>
@@ -31,7 +31,7 @@
             @blur="showSearchInput = false"
             placeholder="Search..."
             v-show="showSearchInput" />
-        </div>
+        </div> -->
         <mu-button icon slot="right" class='mobile-menu' @click='toggleMobileMenu'>
           <mu-icon :value="mobileMenuExpand ? 'close' : 'menu'"></mu-icon>
         </mu-button>

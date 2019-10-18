@@ -206,12 +206,13 @@ export default {
         let i = 0
         for (let city of cityList) {
           await this.getCityCenter(city[0]).then(center => {
-            console.log(city[0], center)
             new mapboxgl.Marker({
               element: this.$refs[`city-${i}`][0]
             })
             .setLngLat(center)
             .addTo(this.map)
+          }).catch(name => {
+            console.error(name, 'fail')
           })
           i = i + 1
         }
@@ -294,22 +295,27 @@ export default {
         border: 1px solid ${colorObj[0]}`
     },
     getCityCenter (name) {
+      const requestService = (name, done) => {
+        geoService.forwardGeocode({
+          query: name,
+          types: ['place'],
+          limit: 1
+        }).send()
+        .then(response => {
+          const match = response.body
+          done(match.features[0])
+        })
+      }
       return new Promise((resolve, reject) => {
         if (CITY_GEO_DATA[name]) {
           resolve(CITY_GEO_DATA[name])
         } else {
-          geoService.forwardGeocode({
-            query: name,
-            types: ['place'],
-            limit: 1
-          }).send()
-          .then(response => {
-            const match = response.body;
-            if (match.features[0]) {
-              resolve(match.features[0].center)
+          requestService(name, (result) => {
+            if (result) {
+              console.log(name, result.center)
+              resolve(result.center)
             } else {
-              console.error(name, 'fail')
-              reject()
+              reject(name)
             }
           })
         }
@@ -324,7 +330,7 @@ export default {
           const cityDict = {}
           const cityData = {}
           for (let item of Object.keys(res.data)) {
-            const itemArr = item.replace(/(\s|\"|\[|\])/g, '').split(',')
+            const itemArr = item.replace(/(\"|\[|\])/g, '').split(', ')
             if (itemArr[1] !== 'nil') {
               cityDict[itemArr[1]] = cityDict[itemArr[1]] || []
               if (itemArr[0] !== 'nil') {
