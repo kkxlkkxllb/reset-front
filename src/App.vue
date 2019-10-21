@@ -5,7 +5,7 @@
         :z-depth='1'
         class="app-header main-container">
         <a class="logo" href='/#/' slot="left">
-          <i class="iconfont icon-reset_logo_" />
+          <i class="iconfont icon-reset_logo_-" />
         </a>
         <mu-button
           v-for="(item, index) in navs"
@@ -14,7 +14,9 @@
           :class="{active: $route.name === item}"
           :to="`/${item}`"
           flat
-          slot="left">{{$t('nav.' + item)}}</mu-button>
+          slot="left">
+            {{$t('nav.' + item)}}
+          </mu-button>
         <div class="language" slot="left">
           <a
             href='#'
@@ -93,7 +95,7 @@ export default {
 <style lang="stylus">
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic')
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pontano+Sans')
-@import url('//at.alicdn.com/t/font_1297427_2hbtyvne6q2.css')
+@import url('//at.alicdn.com/t/font_1297427_q7py7lpsujo.css')
 
 $regularWidth = 960px
 $mobileWidth = 640px

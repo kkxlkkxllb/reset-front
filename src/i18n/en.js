@@ -4,7 +4,9 @@ export default {
     confirmBtn: 'Confirm',
     requireLoginTip: 'Please login your account',
     loading: 'loading...',
-    viewMore: 'View more'
+    viewMore: 'View more',
+    PREV: 'PREV',
+    NEXT: 'NEXT'
   },
   nav: {
     standard: 'Explore the Standard',
@@ -27,5 +29,24 @@ export default {
     clear: 'Clear',
     currentNum: 'Current AP Number',
     mapHint: 'Presence of RESET Air Accredited Professionals Globally'
+  },
+  footer: {
+    what: 'What is ',
+    how: 'How to apply?',
+    about: 'About',
+    aboutUs: 'About Us',
+    contactUs: 'Contact Us',
+    resource: 'Resources',
+    news: 'Events & News',
+    cs: 'Core & Shell',
+    ci: 'Commercial Interiors',
+    cert: 'Certification',
+    process: 'Process',
+    pricing: 'Pricing',
+    network: 'Network',
+    projects: 'Projects',
+    address1: '1F-B,102 Lixi Lu, Changning District',
+    address2: 'Shanghai 20050',
+    address3: 'People’s Republic of China'
   }
 }

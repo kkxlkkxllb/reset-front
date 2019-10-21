@@ -3,54 +3,54 @@
     <div class='content-container'>
       <mu-row gutter wrap class='menu'>
         <mu-col lg='3' md='6' span='12'>
-          <h2>What is RESET™?</h2>
-          <a href="/">Home</a>
+          <h2>{{$t('footer.what')}}RESET<sup>®</sup>?</h2>
+          <a href="/">{{$t('nav.home')}}</a>
           <a href="https://reset.build/standard" rel="noopener">
-          RESET™ Air
+          RESET<sup>®</sup> Air
           </a>
           <a href="https://reset.build/standard#programs" rel="noopener">
-          RESET™ Air - Core & Shell
+          RESET<sup>®</sup> Air - {{$t('footer.cs')}}
           </a>
           <a href="https://reset.build/standard#programs" rel="noopener">
-          RESET™ Air - Commercial Interiors
+          RESET<sup>®</sup> Air - {{$t('footer.ci')}}
           </a>
           <a href="https://reset.build/certification" rel="noopener">
-          Certification
+          {{$t('footer.cert')}}
           </a>
         </mu-col>
         <mu-col lg='3' md='6' span='12'>
-          <h2>How to apply?</h2>
+          <h2>{{$t('footer.how')}}</h2>
           <a href="https://reset.build/certification#process" rel="noopener">
-          Process
+          {{$t('footer.process')}}
           </a>
           <a href="https://reset.build/certification#pricing" rel="noopener">
-          Pricing
+          {{$t('footer.pricing')}}
           </a>
-          <h3>Network</h3>
+          <h3>{{$t('footer.network')}}</h3>
           <a href="https://reset.build/projects">
-            RESET™ Projects
+            RESET<sup>®</sup> {{$t('footer.projects')}}
           </a>
           <a href="https://reset.build/ap">
-            RESET™ AP
+            RESET<sup>®</sup> AP
           </a>
         </mu-col>
         <mu-col lg='2' md='6' span='12'>
-          <h2>About</h2>
+          <h2>{{$t('footer.about')}}</h2>
           <a href="https://reset.build/about_us" rel="noopener">
-          About Us
+            {{$t('footer.aboutUs')}}
           </a>
           <a href="https://reset.build/contact">
-            Contact Us
+            {{$t('footer.contactUs')}}
           </a>
           <a href="https://reset.build/resources">
-            Resources
+            {{$t('footer.resource')}}
           </a>
           <a href="https://reset.build/blogs">
-            Events & News
+            {{$t('footer.news')}}
           </a>
         </mu-col>
         <mu-col lg='4' md='6' span='12'>
-          <h2>Contact Us</h2>
+          <h2>{{$t('footer.contactUs')}}</h2>
           <div class="has-icon">
             <i class="iconfont icon-mail" />
             <a href="mailto:info@reset.build">
@@ -65,11 +65,11 @@
             <i class="iconfont icon-location" />
             GIGA 循绿
             <br />
-            1F-B,102 Lixi Lu, Changning District
+            {{$t('footer.address1')}}
             <br />
-            Shanghai 20050
+            {{$t('footer.address2')}}
             <br />
-            People’s Republic of China
+            {{$t('footer.address3')}}
           </div>
         </mu-col>
       </mu-row>

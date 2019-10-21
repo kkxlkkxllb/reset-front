@@ -4,16 +4,18 @@ export default {
     confirmBtn: '确定',
     requireLoginTip: '请先登录您的账号',
     loading: '加载中...',
-    viewMore: '查看更多'
+    viewMore: '查看更多',
+    PREV: '上一页',
+    NEXT: '下一页'
   },
   nav: {
-    standard: 'RESET™标准',
-    certification: 'RESET™认证',
+    standard: 'RESET®标准',
+    certification: 'RESET®认证',
     network: '合作伙伴',
     blogs: '活动 & 新闻',
     about_us: '关于我们',
     home: '主页',
-    ap: 'The RESET Air Accredited Professionals',
+    ap: 'RESET Air 认可的专业人员',
     apDetail: 'AP 详情'
   },
   AP: {
@@ -26,6 +28,25 @@ export default {
     searchHint: '按项目名称搜索',
     clear: '清除',
     currentNum: '当前AP个数',
-    mapHint: 'Presence of RESET Air Accredited Professionals Globally'
+    mapHint: 'RESET Air 认可的专业人员全球分布状态'
+  },
+  footer: {
+    what: '什么是 ',
+    how: '如何申请?',
+    about: '关于',
+    aboutUs: '关于我们',
+    contactUs: '联系我们',
+    resource: '资源',
+    news: '活动 & 新闻',
+    cs: '内核&外壳',
+    ci: '商业室内',
+    cert: '认证',
+    process: '流程',
+    pricing: '价格',
+    network: '合作伙伴',
+    projects: '项目',
+    address1: '长宁区利西路1F-B,102',
+    address2: '上海 20050',
+    address3: '中华人民共和国'
   }
 }

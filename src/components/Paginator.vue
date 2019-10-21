@@ -2,13 +2,13 @@
   <div class="paginator">
     <mu-button flat @click="prev" :disabled="current === 1">
       <mu-icon left value=":iconfont icon-left-long"></mu-icon>
-      PREV
+      {{$t('app.PREV')}}
     </mu-button>
     <div class="page-container">
       <mu-text-field solo :value="current" @change="change" /> / <span>{{total}}</span>
     </div>
     <mu-button flat @click="next" :disabled="current === total">
-      NEXT
+      {{$t('app.NEXT')}}
       <mu-icon right value=":iconfont icon-right-long"></mu-icon>
     </mu-button>
   </div>
