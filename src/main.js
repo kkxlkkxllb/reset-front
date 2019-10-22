@@ -38,7 +38,7 @@ Vue.use(Toast, {
 })
 Vue.use(VueAxios, axios)
 theme.use('light')
-// axios.defaults.baseURL = '/web'
+axios.defaults.baseURL = '/api'
 
 const i18n = new VueI18n({
   locale: store.getters.lang,

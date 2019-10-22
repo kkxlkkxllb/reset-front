@@ -31,7 +31,7 @@ export default {
     mapHint: 'RESET Air 认可的专业人员全球分布状态'
   },
   footer: {
-    what: '什么是 ',
+    what: '是什么?',
     how: '如何申请?',
     about: '关于',
     aboutUs: '关于我们',

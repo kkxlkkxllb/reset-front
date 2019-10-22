@@ -11,8 +11,8 @@ module.exports = {
   devServer: {
     port: 3000,
     proxy: {
-      '/web': {
-        target: 'http://api.eradai.com', // 接口的域名
+      '/api': {
+        target: 'http://eradai.com', // 接口的域名
         ws: false,
         secure: false, // 如果是https接口，需要配置这个参数
         logLevel: 'debug',

@@ -3,7 +3,7 @@
     <div class='content-container'>
       <mu-row gutter wrap class='menu'>
         <mu-col lg='3' md='6' span='12'>
-          <h2>{{$t('footer.what')}}RESET<sup>®</sup>?</h2>
+          <h2>RESET<sup>®</sup>{{$t('footer.what')}}</h2>
           <a href="/">{{$t('nav.home')}}</a>
           <a href="https://reset.build/standard" rel="noopener">
           RESET<sup>®</sup> Air
