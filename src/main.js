@@ -6,8 +6,7 @@ import VueI18n from 'vue-i18n'
 import './registerServiceWorker'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import VueScrollTo from 'vue-scrollto'
-
+import VueLazyload from 'vue-lazyload'
 import MuseUI from 'muse-ui'
 import Toast from 'muse-ui-toast'
 import NProgress from 'muse-ui-progress'
@@ -27,10 +26,12 @@ Vue.use(MuseUI)
 Vue.use(VueI18n)
 Vue.use(Message)
 Vue.use(Loading)
-Vue.use(VueScrollTo)
 Vue.use(NProgress, {
   color: '#DCE5FD',
   size: 5
+})
+Vue.use(VueLazyload, {
+  attempt: 2
 })
 Vue.use(Toast, {
   position: 'top',

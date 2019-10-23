@@ -12,7 +12,7 @@
           :key='index'
           class="menu-item"
           :class="{active: $route.name === item}"
-          :to="`/${item}`"
+          :href="`/${item}`"
           flat
           slot="left">
             {{$t('nav.' + item)}}

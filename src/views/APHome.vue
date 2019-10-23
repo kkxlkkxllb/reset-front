@@ -32,7 +32,10 @@
     <div class="nav-bar">
       <div class="content-container">
         <mu-breadcrumbs>
-          <mu-breadcrumbs-item key="home" to="/">{{$t('nav.home')}}</mu-breadcrumbs-item>
+          <li class="mu-breadcrumbs-item">
+            <a href="/">{{$t('nav.home')}}</a>
+          </li>
+          <mu-breadcrumbs-item key="home"></mu-breadcrumbs-item>
           <mu-breadcrumbs-item key="ap" :disabled="true">{{$t('nav.ap')}}</mu-breadcrumbs-item>
         </mu-breadcrumbs>
       </div>
@@ -96,7 +99,7 @@
           v-show="showLoader"
           class="loader" :size="36"></mu-circular-progress>
         <div class="list-table" v-show="!showLoader">
-          <table>
+          <table v-lazy-container="{ selector: 'img' }">
             <thead>
               <tr>
                 <th class="ap-avatar"></th>
@@ -114,7 +117,7 @@
                 @click="navToApDetail(ap.id)">
                 <td class="avatar-item">
                   <mu-avatar :size="48">
-                    <img :src="ASSET_BASE + ap.avatar_url">
+                    <img :data-src="ASSET_BASE + ap.avatar_url">
                   </mu-avatar>
                 </td>
                 <td class="text-left">

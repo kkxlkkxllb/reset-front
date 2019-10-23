@@ -3,8 +3,11 @@
     <div class="nav-bar">
       <div class="content-container">
         <mu-breadcrumbs>
-          <mu-breadcrumbs-item key="home" to="/">{{$t('nav.home')}}</mu-breadcrumbs-item>
-          <mu-breadcrumbs-item key="ap" to="/ap">{{$t('nav.ap')}}</mu-breadcrumbs-item>
+          <li class="mu-breadcrumbs-item">
+            <a href="/">{{$t('nav.home')}}</a>
+          </li>
+          <mu-breadcrumbs-item key="home"></mu-breadcrumbs-item>
+          <mu-breadcrumbs-item key="ap" to="/">{{$t('nav.ap')}}</mu-breadcrumbs-item>
           <mu-breadcrumbs-item key="apDetail" :disabled="true">{{$t('nav.apDetail')}}</mu-breadcrumbs-item>
         </mu-breadcrumbs>
       </div>
