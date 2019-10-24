@@ -6,17 +6,17 @@ export const EMAIL_REGX = '^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-
 export const SENSOR_FILE_URL = 'https://resetearth.com/download/WorldGBC_and_RESET_Kit_of_Parts.zip'
 export const ASSET_BASE = 'http://eradai.com'
 export const AP_MAP_COLOR_LIST = [
-  ['#FCFFF1', 5, 15],
-  ['#D9F4F8', 10, 30],
-  ['#8FCED2', 15, 45],
-  ['#4DAAFE',0, 60],
-  ['#4D71FE',5, 85],
-  ['#5A58F8', 40, 100]
+  ['#FAE38C', 5, 15],
+  ['#66DA98', 10, 30],
+  ['#52E7F0', 15, 45],
+  ['#56A2FF', 0, 60],
+  ['#2718FF', 5, 85],
+  ['#9658F8', 40, 100]
 ]
 export const CITY_GEO_DATA = {
-  Taipei: [121.63333, 5.03333],
+  Taipei: [121.558441, 25.116974],
   Chengdu: [104.06667, 30.66361],
-  Dubai: [55.2962, 5.2684],
+  Dubai: [55.315154, 25.270043],
   'San Antonio': [-98.4951, 9.4246],
   Dortmund: [7.46528, 51.51389],
   Zürich: [8.54, 47.37861],
@@ -35,12 +35,12 @@ export const CITY_GEO_DATA = {
   Gurgaon: [77.03333, 28.46667],
   Paris: [2.35183, 48.85658],
   Bangalore: [77.59796, 12.96991],
-  Taiwan: [27.639586, -31.849465],
+  Taiwan: [121.558441, 25.116974],
   Seattle: [-122.3301, 47.6038],
   Hangzhou: [120.15507, 30.2741],
   Shenzhen: [114.05471, 22.535383],
   'Hsin-chu': [-1.04665, 42.28369],
-  Jiangsu: [127.51944, 35.64639],
+  Jiangsu: [118.76667, 32.05],
   Chicago: [-87.6244, 41.8756],
   Ahmedabad: [72.58, 23.03],
   Cranfield: [-91.07, 31.5],

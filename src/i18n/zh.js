@@ -6,7 +6,13 @@ export default {
     loading: '加载中...',
     viewMore: '查看更多',
     PREV: '上一页',
-    NEXT: '下一页'
+    NEXT: '下一页',
+    desc: '描述',
+    project: '参与的项目',
+    getEmail: '获取邮箱',
+    LinkdIn: '英领',
+    otherCity: '你愿意提供认证服务的其他城市',
+    copyright: '版权所有'
   },
   nav: {
     standard: 'RESET®标准',
@@ -28,7 +34,8 @@ export default {
     searchHint: '按项目名称搜索',
     clear: '清除',
     currentNum: '当前AP个数',
-    mapHint: 'RESET Air 认可的专业人员全球分布状态'
+    mapHint: 'RESET Air 认可的专业人员全球分布状态',
+    people: '人'
   },
   footer: {
     what: '是什么?',

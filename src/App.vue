@@ -40,11 +40,11 @@
       </mu-appbar>
     </div>
     <div class="main-container"><router-view/></div>
-    <Footer />
+    <FooterOld />
   </div>
 </template>
 <script>
-import Footer from '@/components/Footer'
+import FooterOld from '@/components/FooterOld'
 
 export default {
   name: 'App',
@@ -62,7 +62,7 @@ export default {
     }
   },
   components: {
-    Footer
+    FooterOld
   },
   computed: {
     lang () {
@@ -123,8 +123,46 @@ $primaryColor = #22BBAE
   background $primaryColor !important
 .text-left
   text-align left
-.custom-selector .mu-option.is-selected .mu-item
-  color $primaryColor
+.mu-tooltip.bill-popup
+  background white
+  color #333
+  font-size 12px
+  &:after
+    position absolute
+    bottom -20px
+    left 50%
+    content ''
+    margin-left -10px
+    width 0
+    height 0
+    border-width 10px
+    border-style solid
+    border-color #fff transparent transparent transparent
+.mu-popover
+  box-shadow 0 2px 8px rgba(0,0,0,.15)
+  border-radius 0 0 6px 6px !important
+  .mu-list
+    .mu-item-title
+      font-weight normal
+      font-size 14px
+      line-height 22px
+      color rgba(0,0,0,.65)
+.mu-select-content
+  padding-left 16px
+.custom-selector
+  margin-top 35px
+  .mu-option.is-selected .mu-item
+    color $primaryColor
+  .mu-option.is-focused
+    background #f1fcfa
+  .mu-option
+    .hover
+      .mu-item-title
+        color $primaryColor
+      background #f1fcfa
+  .mu-item
+    padding-top 8px
+    padding-bottom 8px
 .header
   background white
   position fixed

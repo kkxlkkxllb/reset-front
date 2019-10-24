@@ -6,7 +6,13 @@ export default {
     loading: 'loading...',
     viewMore: 'View more',
     PREV: 'PREV',
-    NEXT: 'NEXT'
+    NEXT: 'NEXT',
+    desc: 'Description',
+    project: 'Participated projects',
+    getEmail: 'Get the email',
+    LinkdIn: 'LinkdIn',
+    otherCity: 'Other Cities in which you will offer AP services',
+    copyright: 'Copyright'
   },
   nav: {
     standard: 'Explore the Standard',
@@ -28,7 +34,8 @@ export default {
     searchHint: 'Search by project name',
     clear: 'Clear',
     currentNum: 'Current AP Number',
-    mapHint: 'Presence of RESET Air Accredited Professionals Globally'
+    mapHint: 'Presence of RESET Air Accredited Professionals Globally',
+    people: 'Person'
   },
   footer: {
     what: 'What is ',

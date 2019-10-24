@@ -5,23 +5,24 @@
       class="map-area"
     >
       <template v-if="map">
-        <div
+        <CityPoint
           v-for="(city,i) in cityList"
-          :key='i'
-          class="city-marker"
-          :class="mapLoad ? 'show' : ''"
-          :style="markerStyle(city[1])"
-          :ref="`city-${i}`"
-        >
-         <span class="mp-dot" :style="`background: ${getColor(city[1])[0]}`"></span>
-        </div>
+          :map='map'
+          :city='city'
+          :key='i' />
       </template>
       <div class="desc-card">
         <div class="title">{{$t('AP.mapHint')}}</div>
         <div class="color-list">
-          <mu-row>
+          <mu-row class="color-block">
             <mu-col v-for="(color, i) in colorList" :key='i'>
               <div class="color-item" :style="'border-color:' + color[0]">
+              </div>
+            </mu-col>
+          </mu-row>
+          <mu-row>
+            <mu-col v-for="(color, i) in colorList" :key='i'>
+              <div class="color-label">
                 <span>{{color[1]}}</span>
               </div>
             </mu-col>
@@ -99,45 +100,41 @@
           v-show="showLoader"
           class="loader" :size="36"></mu-circular-progress>
         <div class="list-table" v-show="!showLoader">
-          <table v-lazy-container="{ selector: 'img' }">
-            <thead>
-              <tr>
-                <th class="ap-avatar"></th>
-                <th class="text-left">{{$t('AP.name')}}</th>
-                <th class="text-left">{{$t('AP.location')}}</th>
-                <th>{{$t('AP.certification')}}</th>
-                <th>{{$t('AP.projects')}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="ap in apList"
-                :key="ap.id"
-                class="ap-item"
-                @click="navToApDetail(ap.id)">
-                <td class="avatar-item">
-                  <mu-avatar :size="48">
-                    <img :data-src="ASSET_BASE + ap.avatar_url">
-                  </mu-avatar>
-                </td>
-                <td class="text-left">
-                  <div class="ap-name">{{ap.name}}</div>
-                  <div class="ap-company">{{ap.company}}</div>
-                </td>
-                <td class="text-left">
-                  {{ap.location}}
-                </td>
-                <td style="width: 120px">
-                  <span class="certification-icon">
-                    <i class="iconfont icon-RESETAIR" />
-                  </span>
-                </td>
-                <td style="width: 120px">
-                  {{ap.projects_count}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div v-lazy-container="{ selector: 'img' }">
+            <mu-row class="list-header">
+              <mu-col class="ap-avatar" span="1"></mu-col>
+              <mu-col class="text-left" span="4">{{$t('AP.name')}}</mu-col>
+              <mu-col class="text-left" span="4">{{$t('AP.location')}}</mu-col>
+              <mu-col span="1.5">{{$t('AP.certification')}}</mu-col>
+              <mu-col span="1.5">{{$t('AP.projects')}}</mu-col>
+            </mu-row>
+            <mu-row
+              v-for="ap in apList"
+              :key="ap.id"
+              class="ap-item"
+              @click="navToApDetail(ap.id)">
+              <mu-col class="avatar-item" span="1">
+                <mu-avatar :size="48">
+                  <img :data-src="ASSET_BASE + ap.avatar_url">
+                </mu-avatar>
+              </mu-col>
+              <mu-col class="text-left" span="4">
+                <div class="ap-name">{{ap.name}}</div>
+                <div class="ap-company">{{ap.company}}</div>
+              </mu-col>
+              <mu-col class="text-left" span="4">
+                {{ap.location}}
+              </mu-col>
+              <mu-col span="1.5">
+                <span class="certification-icon">
+                  <i class="iconfont icon-RESETAIR" />
+                </span>
+              </mu-col>
+              <mu-col span="1.5">
+                {{ap.projects_count}}
+              </mu-col>
+            </mu-row>
+          </div>
         </div>
         <Paginator
           v-if="totalPage > 1"
@@ -162,9 +159,9 @@ import { $get } from '@/libs/api'
 import { getBounds } from 'geolib'
 import _ from 'lodash'
 import Paginator from '../components/Paginator'
+import CityPoint from '../components/CityPoint'
 const mbxClient = require('@mapbox/mapbox-sdk')
 const mbxGeo = require('@mapbox/mapbox-sdk/services/geocoding')
-const mbxStyles = require('@mapbox/mapbox-sdk/services/styles')
 mapboxgl.accessToken = MAPBOX_TOKEN
 const geoService = mbxGeo({ accessToken: MAPBOX_TOKEN })
 const PER_PAGE = 20
@@ -175,7 +172,6 @@ export default {
     return {
       ASSET_BASE,
       map: null,
-      mapLoad: false,
       showLoader: true,
       colorList: AP_MAP_COLOR_LIST,
       searchKey: '',
@@ -190,7 +186,8 @@ export default {
     }
   },
   components: {
-    Paginator
+    Paginator,
+    CityPoint
   },
   mounted () {
     if (this.map) {
@@ -208,20 +205,16 @@ export default {
       this.fetchLocationList(async cityList => {
         let i = 0
         for (let city of cityList) {
-          await this.getCityCenter(city[0]).then(center => {
-            new mapboxgl.Marker({
-              element: this.$refs[`city-${i}`][0]
-            })
-            .setLngLat(center)
-            .addTo(this.map)
+          await this.getCityCenter(city.name).then(center => {
+            city.center = center
           }).catch(name => {
             console.error(name, 'fail')
           })
           i = i + 1
         }
+        this.cityList = cityList.filter(e => e.center)
       })
       this.fetchAPList()
-      this.mapLoad = true
     })
     var nav = new mapboxgl.NavigationControl()
     this.map.addControl(nav, 'bottom-right')
@@ -279,24 +272,6 @@ export default {
         this.showLoader = false
       })
     },
-    getColor (num) {
-      let targetColor = this.colorList[0]
-      for (let color of this.colorList) {
-        if (num < color[1]) {
-          targetColor = color
-          break
-        }
-      }
-      return targetColor
-    },
-    markerStyle (num) {
-      const colorObj = this.getColor(num)
-      const bgColor = Color(colorObj[0]).alpha(0.8)
-      return `width: ${colorObj[2]}px;
-        height: ${colorObj[2]}px;
-        background: ${bgColor};
-        border: 1px solid ${colorObj[0]}`
-    },
     getCityCenter (name) {
       const requestService = (name, done) => {
         geoService.forwardGeocode({
@@ -346,9 +321,13 @@ export default {
               }
             }
           }
-          this.cityList = Object.keys(cityData).map(e => [e, cityData[e]])
           this.cityDict = cityDict
-          done(this.cityList)
+          done(Object.keys(cityData).map(e => {
+            return {
+              name: e,
+              count: cityData[e]
+            }
+          }))
         }
       })
     }
@@ -391,37 +370,23 @@ $activeColor = #22BBAE
     margin 0 auto
     margin-top 8px
     position relative
+    .color-block
+      border 1px solid #E0E0E0
     &:before
       content '1'
       position absolute
       bottom 0
       left -4px
       color #858585
-
   .color-item
     border-top 8px solid transparent
+  .color-label
     color #858585
     font-size 12px
     position relative
     text-align right
     span
       margin-right -6px
-.city-marker
-  border-radius 50%
-  position absolute
-  display none
-  &.show
-    display block
-.mp-dot
-  display inline-block
-  width 6px
-  height 6px
-  border-radius 50%
-  position absolute
-  left 50%
-  margin-left -3px
-  top 50%
-  margin-top -3px
 .nav-bar
   background #F9F9F9
 .city-filter
@@ -460,7 +425,6 @@ $activeColor = #22BBAE
   position relative
   .mu-input
     min-height 0
-    padding 0 0 0 16px
     width 100%
     flex 1 1 auto
     border-left 1px solid #EEF1F6
@@ -484,15 +448,20 @@ $activeColor = #22BBAE
   margin 16px
 .ap-item
   cursor pointer
-  border-top 1px solid rgba(244,247,252,1)
+  box-shadow 0px 3px 10px 0px rgba(216,216,216,0.11)
+  border-radius 4px
+  border 1px solid rgba(244,247,252,1)
+  margin-bottom 8px
+  line-height 1
   &:hover
     background #f5f5f5
-  td
+  .text-left
+    line-height 1.4
+    font-size 14px
+  > div
     padding 10px 0
     color #858585
-    font-size 14px
-  .avatar-item
-    width 88px
+    align-self center
   .ap-name
     font-size 16px
     font-weight 600
@@ -501,10 +470,6 @@ $activeColor = #22BBAE
     font-size 13px
 .list-table
   padding-bottom 16px
-  table
-    width 100%
-    border-collapse collapse
-    border-spacing 0
-    th
-      padding 16px 0
+  .list-header
+    padding 16px 0
 </style>
