@@ -244,14 +244,19 @@ export default {
     },
     countryChanged (value) {
       this.fetchAPList({country: value})
+      this.currentCity = -1
     },
     cityChanged (value) {
       this.fetchAPList({city: value})
     },
     doSearch (e) {
+      if (this.searchKey === e.target.value) {
+        return
+      }
       this.searchKey = e.target.value
+      // also support project_name
       this.fetchAPList({
-        project_name: this.searchKey
+        name: this.searchKey
       })
     },
     fetchAPList (option = {}) {

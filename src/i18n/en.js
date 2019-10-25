@@ -31,7 +31,7 @@ export default {
     projects: 'Projects',
     city: 'City',
     country: 'Country',
-    searchHint: 'Search by project name',
+    searchHint: 'Search by AP name',
     clear: 'Clear',
     currentNum: 'Current AP Number',
     mapHint: 'Presence of RESET Air Accredited Professionals Globally',

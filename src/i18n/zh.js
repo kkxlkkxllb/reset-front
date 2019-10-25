@@ -31,7 +31,7 @@ export default {
     projects: '项目',
     city: '城市',
     country: '国家',
-    searchHint: '按项目名称搜索',
+    searchHint: '按AP名称搜索',
     clear: '清除',
     currentNum: '当前AP个数',
     mapHint: 'RESET Air 认可的专业人员全球分布状态',

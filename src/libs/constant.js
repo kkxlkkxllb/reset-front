@@ -9,8 +9,8 @@ export const AP_MAP_COLOR_LIST = [
   ['#FAE38C', 5, 15],
   ['#66DA98', 10, 30],
   ['#52E7F0', 15, 45],
-  ['#56A2FF', 0, 60],
-  ['#2718FF', 5, 85],
+  ['#56A2FF', 20, 60],
+  ['#2718FF', 25, 85],
   ['#9658F8', 40, 100]
 ]
 export const CITY_GEO_DATA = {

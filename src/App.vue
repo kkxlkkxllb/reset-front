@@ -106,7 +106,7 @@ $primaryColor = #22BBAE
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   text-align center
-  color #2c3e50
+  color #333
   .mu-button
     text-transform initial
     min-width 120px
@@ -154,7 +154,7 @@ $primaryColor = #22BBAE
   .mu-option.is-selected .mu-item
     color $primaryColor
   .mu-option.is-focused
-    background #f1fcfa
+    background transparent
   .mu-option
     .hover
       .mu-item-title
@@ -226,6 +226,8 @@ $primaryColor = #22BBAE
   margin-top 80px
 .nav-bar .mu-breadcrumbs-item
   color #333333
+  &.is-disabled
+    color #A6A6A6
 .search-container
   margin-left 5px
   position absolute

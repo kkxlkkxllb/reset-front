@@ -51,7 +51,11 @@
           <div class="project-card"
             v-for="project in apInfo.projects"
             :key="project.id">
-            <div class="p-img"><img :src="ASSET_BASE + project.display_images[0].url" /></div>
+            <div class="p-img">
+              <img
+                v-if="project.display_images[0]"
+                :src="ASSET_BASE + project.display_images[0].url" />
+            </div>
             <div class="p-desc">
               <div class="pid">{{project.recognize_id || '&nbsp;'}}</div>
               <div class="p-name1">{{project.native_name || project.name}}</div>
@@ -147,6 +151,8 @@ export default {
         font-size 14px
     h3
       font-size 20px
+      border-bottom 1px solid #F4F7FC
+      padding-bottom 12px
     .project-card
       display flex
       padding 16px
@@ -155,6 +161,7 @@ export default {
       border-radius 3px
       .p-img
         flex 0 1 212px
+        min-height 117px
         img
           width 100%
           border-radius 3px
