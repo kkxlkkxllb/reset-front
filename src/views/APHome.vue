@@ -62,7 +62,7 @@
                   @change="countryChanged"
                   v-model='currentCountry'
                   popover-class='custom-selector'>
-                  <mu-option :key="-1" label="All Country" :value="-1"></mu-option>
+                  <mu-option :key="-1" :label="$t('AP.allCountry')" :value="-1"></mu-option>
                   <mu-option
                     v-for="(v,i) in Object.keys(cityDict)"
                     :key="i"
@@ -79,7 +79,7 @@
                   @change='cityChanged'
                   v-model='currentCity'
                   popover-class='custom-selector'>
-                  <mu-option :key="-1" label="All Cities" :value="-1"></mu-option>
+                  <mu-option :key="-1" :label="$t('AP.allCity')" :value="-1"></mu-option>
                   <mu-option
                     v-for="(v,i) in cityListForSelector"
                     :key="i"

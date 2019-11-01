@@ -35,20 +35,20 @@
             <i class="iconfont icon-location" />
             <span>{{apInfo.location}}</span>
           </div>
-          <div class="desc-panel">
+          <!-- <div class="desc-panel">
             <label>{{$t('app.desc')}}</label>
             <div>-</div>
           </div>
           <div class="desc-panel">
-            <label>LinkdIn</label>
+            <label>LinkedIn</label>
             <div>-</div>
           </div>
           <div class="desc-panel">
             <label>{{$t('app.otherCity')}}</label>
             <div>-</div>
-          </div>
+          </div> -->
           <h3>{{$t('app.project')}}</h3>
-          <div class="project-card"
+          <a :href="`/projects/${project.id}`" class="project-card"
             v-for="project in apInfo.projects"
             :key="project.id">
             <div class="p-img">
@@ -62,7 +62,7 @@
               <div class="p-name2">{{project.name}}</div>
               <div class="p-standard">{{project.standard_type_humanize}}</div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

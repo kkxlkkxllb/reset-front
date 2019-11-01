@@ -8,7 +8,7 @@ export default {
     PREV: '上一页',
     NEXT: '下一页',
     desc: '描述',
-    project: '参与的项目',
+    project: 'RESET 项目',
     getEmail: '获取邮箱',
     LinkdIn: '英领',
     otherCity: '你愿意提供认证服务的其他城市',
@@ -35,7 +35,9 @@ export default {
     clear: '清除',
     currentNum: '当前AP个数',
     mapHint: 'RESET Air 认可的专业人员全球分布状态',
-    people: '人'
+    people: '人',
+    allCountry: '所有国家',
+    allCity: '所有城市'
   },
   footer: {
     what: '是什么?',

@@ -7,11 +7,11 @@ export default {
     viewMore: 'View more',
     PREV: 'PREV',
     NEXT: 'NEXT',
-    desc: 'Description',
-    project: 'Participated projects',
-    getEmail: 'Get the email',
+    desc: 'Introduction',
+    project: 'RESET Projects',
+    getEmail: 'Get Email',
     LinkdIn: 'LinkdIn',
-    otherCity: 'Other Cities in which you will offer AP services',
+    otherCity: 'Other cities in which AP services are offered',
     copyright: 'Copyright'
   },
   nav: {
@@ -21,7 +21,7 @@ export default {
     blogs: 'Event + News',
     about_us: 'About Us',
     home: 'Home',
-    ap: 'The RESET Air Accredited Professionals',
+    ap: 'RESET Air Accredited Professionals',
     apDetail: 'AP Details'
   },
   AP: {
@@ -31,11 +31,13 @@ export default {
     projects: 'Projects',
     city: 'City',
     country: 'Country',
-    searchHint: 'Search by AP name',
+    searchHint: 'Search AP by Name',
     clear: 'Clear',
     currentNum: 'Current AP Number',
     mapHint: 'Presence of RESET Air Accredited Professionals Globally',
-    people: 'Person'
+    people: 'Person',
+    allCountry: 'All Countries',
+    allCity: 'All Cities'
   },
   footer: {
     what: 'What is ',
