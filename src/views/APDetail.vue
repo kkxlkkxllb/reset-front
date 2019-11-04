@@ -159,6 +159,8 @@ export default {
       background #fff
       box-shadow 0px 4px 20px 0px rgba(102,99,99,0.05)
       border-radius 3px
+      &:hover
+        background #f5f5f5
       .p-img
         flex 0 1 212px
         min-height 117px

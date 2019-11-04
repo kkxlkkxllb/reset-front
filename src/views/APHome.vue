@@ -243,11 +243,19 @@ export default {
       this.fetchAPList()
     },
     countryChanged (value) {
-      this.fetchAPList({country: value})
+      let params = {country: value}
+      if (value === -1) {
+        params = {}
+      }
+      this.fetchAPList(params)
       this.currentCity = -1
     },
     cityChanged (value) {
-      this.fetchAPList({city: value})
+      let params = {city: value}
+      if (value === -1) {
+        params = {}
+      }
+      this.fetchAPList(params)
     },
     doSearch (e) {
       if (this.searchKey === e.target.value) {
