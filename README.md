@@ -29,3 +29,4 @@ yarn run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 scp -r dist deploy@47.75.4.117:~/reset-build/
+scp -r dist deploy@47.90.17.204:/var/www/reset-build/
